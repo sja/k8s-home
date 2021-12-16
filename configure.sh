@@ -33,7 +33,7 @@ main() {
         verify_kubevip
         verify_age
         verify_git_repository
-        verify_cloudflare
+#        verify_cloudflare
         success
     else
         # sops configuration file
