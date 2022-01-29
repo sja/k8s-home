@@ -26,10 +26,11 @@ spec:
         matchNames:
           - default
           - networking
+          - home
       name: "you"
       customApps:
         - name: Some External Cluster Service
-          url: http://192.168.1.100:5000
+          url: http://10.0.0.137:5000
           icon: test-tube
       groups:
         - name: Communicate
@@ -44,10 +45,6 @@ spec:
           links:
             - name: Box
               url: "https://box.com"
-            - name: Dropbox
-              url: "https://dropbox.com"
-            - name: Drive
-              url: "https://drive.google.com"
         - name: Design
           links:
             - name: Awwwards
