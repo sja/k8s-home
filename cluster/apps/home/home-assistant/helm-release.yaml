@@ -22,6 +22,12 @@ spec:
       tag: "2022.2"
     env:
       TZ: "Europe/Berlin"
+    influxdb:
+      enabled: true
+      auth:
+        admin:
+          username: "${INFLUX_ADMIN_USER}"
+          password: "${INFLUX_ADMIN_PASSWORD}"
     envFrom:
       - secretRef:
           name: home-assistant
