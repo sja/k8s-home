@@ -136,7 +136,7 @@ spec:
       - grafana-worldmap-panel
       - grafana-clock-panel
     serviceMonitor:
-      enabled: true
+      enabled: false # todo
     ingress:
       enabled: true
       ingressClassName: "traefik"
