@@ -28,6 +28,11 @@ spec:
         admin:
           username: "${INFLUX_ADMIN_USER}"
           password: "${INFLUX_ADMIN_PASSWORD}"
+    postgresql:
+      enabled: true
+      persistence:
+        enabled: true
+        storageClass: local-path
     envFrom:
       - secretRef:
           name: home-assistant
