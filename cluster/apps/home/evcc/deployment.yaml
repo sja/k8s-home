@@ -1,0 +1,59 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: evcc
+  namespace: home
+  labels:
+    app: evcc
+spec:
+  replicas: 1
+  template:
+    metadata:
+      name: evcc
+      labels:
+        app: evcc
+    spec:
+      containers:
+        - name: evcc
+          image: andig/evcc:latest
+          imagePullPolicy: IfNotPresent
+          livenessProbe:
+            httpGet:
+              port: web
+          env:
+            - name: TZ
+              value: Europe/Berlin
+          ports:
+            - containerPort: 7070
+              name: web
+          volumeMounts:
+            - name: evcc-config
+              mountPath: /etc/evcc.yaml
+              subPath: evcc.yaml
+      restartPolicy: Always
+      volumes:
+        - name: evcc-config
+          configMap:
+            name: evcc-config
+  selector:
+    matchLabels:
+      app: evcc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: evcc
+spec:
+  selector:
+    app: evcc
+  ports:
+    - port: 7070
+  type: NodePort
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: evcc-config
+data:
+  key: evcc.yaml

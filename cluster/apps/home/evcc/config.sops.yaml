@@ -1,0 +1,27 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+    name: evcc-config
+    namespace: home
+data:
+    evcc.yaml: ENC[AES256_GCM,data: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,iv:Iv6WKcZXPLBRHqS2blLRcCFjJm+0Ql5dZMhri7NbKXo=,tag:QKToMP/I4HknWCdzfrPNdw==,type:str]
+sops:
+    kms: []
+    gcp_kms: []
+    azure_kv: []
+    hc_vault: []
+    age:
+        - recipient: age1ut0l977a2jtal8kgswvu00zjzyh5k9cnudq0msswd9zyvm4jt34qe5n92g
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBCY0FTT25oTmtYVDBhUllo
+            OTlYYWZOSklFVEExWTFhQ2wvYTdSbGc2RFNBCjRiaTI2dmVRcTVENzRqbkFEdStq
+            WHBscFhyRG5RaWI2aERGVFIwbU1EWVUKLS0tIDVraXNDZWRvNitLKzBieHVKZnhU
+            bHREMzB3MnpQV3JKVURwNmhEbHc3ZWsKF/szSH6vglZwhGVRwuhOvH9UCdPb4Sdm
+            NszIG6VlvZhyvVKKgvqxWv91tGaBaiA7QdamgkzG5L8y3qRjBPfnGQ==
+            -----END AGE ENCRYPTED FILE-----
+    lastmodified: "2022-05-03T21:29:39Z"
+    mac: ENC[AES256_GCM,data:UA+VhpjLFJ+wDdpcznPMpFqNSqWBBao8I7sEoXZH2sN3wwf32NM7k7e0cTeH2W1oqX27udcFLPLEn3ITc0jN/1RcxidOCRjsHOT01JarrwC4w9RSMMsjQbRlJ8rDP+653AyyiSax2yp3uN+kmAtCdwvXchHZ3y1ABlgpkZG1ceo=,iv:DeNIiB675fky7Bx9ZnN2JXWfjNCMnr/2EvaqcnDxwC0=,tag:dawDglf1bZX1VCEfJ19SxQ==,type:str]
+    pgp: []
+    encrypted_regex: ^(data|stringData)$
+    version: 3.7.1
