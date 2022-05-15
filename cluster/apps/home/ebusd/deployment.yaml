@@ -1,0 +1,56 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ebusd
+  namespace: home
+  labels:
+    app: ebusd
+spec:
+  replicas: 1
+  template:
+    metadata:
+      namespace: home
+      name: ebusd
+      labels:
+        app: ebusd
+    spec:
+      containers:
+        - name: ebusd
+          image: john30/ebusd
+          command:
+            - 'ebusd'
+            - '--scanconfig'
+            - '--port=8888'
+            - '--httpport=8080'
+            - '--device=enh:10.0.2.72:9999'
+            - '--latency=20'
+            - '--loglevel=info'
+            - '--mqttport=1883'
+            - '--mqtthost=mosquitto'
+            - '--pollinterval=15'
+          imagePullPolicy: IfNotPresent
+          livenessProbe:
+            tcpSocket:
+              port: 8888
+          ports:
+            - containerPort: 8080
+              name: web
+            - containerPort: 8888
+              name: ebusctl
+      restartPolicy: Always
+  selector:
+    matchLabels:
+      app: ebusd
+---
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: home
+  name: ebusd
+spec:
+  selector:
+    app: ebusd
+  ports:
+    - port: 8080
+  type: NodePort
