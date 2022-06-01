@@ -1,14 +1,16 @@
 ---
-apiVersion: source.toolkit.fluxcd.io/v1beta1
+apiVersion: source.toolkit.fluxcd.io/v1beta2
 kind: GitRepository
 metadata:
   name: flux-system
   namespace: flux-system
 spec:
-  interval: 2m0s
+  interval: 5m0s
   ref:
     branch: main
-  url: https://github.com/sja/k8s-home
+  url: ssh://git@github.com/sja/k8s-home
+  secretRef:
+    name: ssh-key-github
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
 kind: Kustomization
