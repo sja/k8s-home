@@ -4,3 +4,5 @@ kind: Kustomization
 resources:
   - helm-release.yaml
   - dashboard
+  - basic-auth.sops.yaml
+  - middleware-auth.yaml

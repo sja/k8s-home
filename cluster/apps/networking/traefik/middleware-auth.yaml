@@ -1,0 +1,10 @@
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: traefik-basic-auth
+  namespace: networking
+spec:
+  basicAuth:
+    secret: basic-auth
+    headerField: X-WebAuth-User

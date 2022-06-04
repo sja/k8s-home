@@ -1,0 +1,31 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-production
+    hajimari.io/enable: "true"
+    hajimari.io/icon: resistor-nodes
+    traefik.ingress.kubernetes.io/router.entrypoints: websecure
+    traefik.ingress.kubernetes.io/router.middlewares: networking-traefik-basic-auth@kubernetescrd
+  labels:
+    app.kubernetes.io/instance: ebusd
+    app.kubernetes.io/name: ebusd
+  name: ebusd
+  namespace: home
+spec:
+  ingressClassName: traefik
+  rules:
+    - host: ebusd.${SECRET_DOMAIN}
+      http:
+        paths:
+          - backend:
+              service:
+                name: ebusd
+                port:
+                  name: web
+            path: /
+            pathType: Prefix
+  tls:
+    - hosts:
+        - ebusd.${SECRET_DOMAIN}
+      secretName: ebusd

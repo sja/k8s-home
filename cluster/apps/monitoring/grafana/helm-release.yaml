@@ -142,6 +142,7 @@ spec:
       ingressClassName: "traefik"
       annotations:
         traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+        traefik.ingress.kubernetes.io/router.middlewares: networking-traefik-basic-auth@kubernetescrd
         cert-manager.io/cluster-issuer: letsencrypt-production
       hosts:
         - "grafana.${SECRET_DOMAIN}"
