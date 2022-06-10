@@ -15,19 +15,38 @@ spec:
       labels:
         app: ebusd
     spec:
+      volumes:
+        - name: config
+          emptyDir: {}
+      initContainers:
+        - name: clone-config
+          image: alpine/git
+          volumeMounts:
+            - mountPath: /config
+              name: config
+          command: ['git', 'clone', 'https://github.com/sja/ebusd-configuration.git', '/config']
       containers:
         - name: ebusd
           image: john30/ebusd
+          volumeMounts:
+            - mountPath: /etc/ebusd
+              name: config
+              subPath: 'latest/de'
           command:
             - 'ebusd'
+            - '--configpath=/etc/ebusd'
+            - '--configlang=de'
             - '--scanconfig'
             - '--port=8888'
             - '--httpport=8080'
             - '--device=enh:10.0.2.72:9999'
             - '--latency=20'
-            - '--loglevel=info'
+            - '--log=all:error'
+            - '--log=bus:info'
+            - '--accesslevel=*'
             - '--mqttport=1883'
             - '--mqtthost=mosquitto'
+            - '--mqtttopic=ebusd'
             - '--pollinterval=15'
           imagePullPolicy: IfNotPresent
           livenessProbe:
