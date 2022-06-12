@@ -27,7 +27,7 @@ spec:
           command: ['git', 'clone', 'https://github.com/sja/ebusd-configuration.git', '/config']
       containers:
         - name: ebusd
-          image: john30/ebusd
+          image: john30/ebusd:v22.3
           volumeMounts:
             - mountPath: /etc/ebusd
               name: config
@@ -50,6 +50,7 @@ spec:
             - '--pollinterval=15'
           imagePullPolicy: IfNotPresent
           livenessProbe:
+            periodSeconds: 60
             tcpSocket:
               port: 8888
           ports:
