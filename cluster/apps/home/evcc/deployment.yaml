@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: evcc
-          image: andig/evcc:latest
+          image: andig/evcc:0.100-amd64
           imagePullPolicy: IfNotPresent
           livenessProbe:
             httpGet:
