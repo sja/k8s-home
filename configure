@@ -30,11 +30,11 @@ main() {
     if [[ "${verify}" == 1 ]]; then
         verify_ansible_hosts
         verify_metallb
-        verify_kubevip
-        verify_addressing
+        #verify_kubevip
+        #verify_addressing # TODO does not work with IPv6
         verify_age
         verify_git_repository
-        verify_cloudflare
+        #verify_cloudflare
         verify_success
     else
         # generate sops configuration file
@@ -61,7 +61,7 @@ main() {
         # encrypt cluster secrets
         sops --encrypt --in-place "${PROJECT_DIR}/cluster/config/cluster-secrets.sops.yaml"
         sops --encrypt --in-place "${PROJECT_DIR}/cluster/core/cluster-issuers/secret.sops.yaml"
-        sops --encrypt --in-place "${PROJECT_DIR}/cluster/apps/networking/cloudflare-ddns/secret.sops.yaml"
+        #sops --encrypt --in-place "${PROJECT_DIR}/cluster/apps/networking/cloudflare-ddns/secret.sops.yaml"
         sops --encrypt --in-place "${PROJECT_DIR}/cluster/apps/networking/external-dns/secret.sops.yaml"
         # generate terraform secrets
         envsubst < "${PROJECT_DIR}/tmpl/terraform/secret.sops.yaml" \
@@ -273,10 +273,11 @@ verify_metallb() {
     ip_floor=$(echo "${BOOTSTRAP_METALLB_LB_RANGE}" | cut -d- -f1)
     ip_ceil=$(echo "${BOOTSTRAP_METALLB_LB_RANGE}" | cut -d- -f2)
 
+    # TODO ipcalc can do IPv6, so split by ',' and add it here
     _has_valid_ip "${ip_floor}" "BOOTSTRAP_METALLB_LB_RANGE"
-    _has_valid_ip "${ip_ceil}" "BOOTSTRAP_METALLB_LB_RANGE"
-    _has_valid_ip "${BOOTSTRAP_METALLB_K8S_GATEWAY_ADDR}" "BOOTSTRAP_METALLB_K8S_GATEWAY_ADDR"
-    _has_valid_ip "${BOOTSTRAP_METALLB_INGRESS_ADDR}" "BOOTSTRAP_METALLB_INGRESS_ADDR"
+    #_has_valid_ip "${ip_ceil}" "BOOTSTRAP_METALLB_LB_RANGE"
+    #_has_valid_ip "${BOOTSTRAP_METALLB_K8S_GATEWAY_ADDR}" "BOOTSTRAP_METALLB_K8S_GATEWAY_ADDR"
+    #_has_valid_ip "${BOOTSTRAP_METALLB_INGRESS_ADDR}" "BOOTSTRAP_METALLB_INGRESS_ADDR"
 }
 
 verify_git_repository() {

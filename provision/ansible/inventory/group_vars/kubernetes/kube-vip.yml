@@ -1,0 +1,4 @@
+---
+# (string) The ARP address kube-vip broadcasts
+kubevip_address: "10.0.0.50"
+kubevip_address_v6: "2a00:6020:4108:dc00:8000::3"
